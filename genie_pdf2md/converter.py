@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 from genie_core.pdf import split_pdf_to_images
