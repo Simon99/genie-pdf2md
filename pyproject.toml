@@ -1,0 +1,16 @@
+[project]
+name = "genie-pdf2md"
+version = "0.1.0"
+description = "Split PDF pages into images and parse each page to Markdown"
+requires-python = ">=3.9"
+dependencies = [
+    "genie-core @ git+https://github.com/Simon99/genie-core.git",
+    "PyMuPDF>=1.23",
+]
+
+[project.scripts]
+genie-pdf2md = "genie_pdf2md.cli:main"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
