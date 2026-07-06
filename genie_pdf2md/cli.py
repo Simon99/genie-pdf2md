@@ -2,6 +2,8 @@ import argparse
 import sys
 from pathlib import Path
 
+from genie_core.llm import DEFAULT_BASE_URL
+
 from .converter import pdf_to_markdown
 
 
@@ -10,7 +12,7 @@ def main():
     parser.add_argument("input", help="Path to PDF file")
     parser.add_argument("-o", "--output", help="Output directory (default: <input>_output/)")
     parser.add_argument("--model", default="qwen3-vl", help="Vision model name (default: qwen3-vl)")
-    parser.add_argument("--url", default="http://localhost:1234/v1", help="LM Studio API URL")
+    parser.add_argument("--url", default=DEFAULT_BASE_URL, help="LM Studio API URL")
     parser.add_argument("--dpi", type=int, default=200, help="Image DPI (default: 200)")
 
     args = parser.parse_args()
@@ -40,6 +42,13 @@ def main():
     print(f"  Markdown: {result['markdown']}")
     print(f"  HTML: {result['html']}")
     print(f"  Images: {result['images_dir']}")
+    if result.get("failed_pages"):
+        failed = ", ".join(str(p) for p in result["failed_pages"])
+        print(
+            f"Warning: {len(result['failed_pages'])} page(s) failed vision parsing "
+            f"(placeholders written): {failed}. Re-run with the same output dir to retry.",
+            file=sys.stderr,
+        )
 
 
 if __name__ == "__main__":
