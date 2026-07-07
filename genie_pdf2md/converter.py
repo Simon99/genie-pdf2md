@@ -59,7 +59,7 @@ def pdf_to_markdown(
     pages = split_pdf_to_images(pdf_path, str(images_dir), dpi=dpi)
 
     # Step 2: Parse each page with vision model (per-page files, resumable)
-    llm = LMStudioClient(base_url=lm_studio_url, model=vision_model)
+    llm = LMStudioClient(base_url=lm_studio_url, model=vision_model, kind="vision")
     markdown_parts = []
     failed_pages = []
 

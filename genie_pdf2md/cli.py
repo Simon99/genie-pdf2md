@@ -11,7 +11,7 @@ def main():
     parser = argparse.ArgumentParser(description="Convert PDF to page images + Markdown")
     parser.add_argument("input", help="Path to PDF file")
     parser.add_argument("-o", "--output", help="Output directory (default: <input>_output/)")
-    parser.add_argument("--model", default="qwen3-vl", help="Vision model name (default: qwen3-vl)")
+    parser.add_argument("--model", default=None, help="Vision model name (default: auto-pick from LM Studio)")
     parser.add_argument("--url", default=DEFAULT_BASE_URL, help="LM Studio API URL")
     parser.add_argument("--dpi", type=int, default=200, help="Image DPI (default: 200)")
 
